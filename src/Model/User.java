@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
 
     private double income;
 
@@ -16,15 +17,6 @@ public class User {
 
     private ArrayList<Transaction> transactions;
 
-    private Calculator calculator = new Calculator();
-
-
-    public double getExpenseReport() {
-        return calculator.creditSpent(transactions);
-    }
-
-
-
     public ArrayList<Goal> getGoals() {
         return goals;
     }
@@ -35,6 +27,14 @@ public class User {
 
     public void setTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
+    }
+
+    public void addTransactions(ArrayList<Transaction> transactions) {
+        this.transactions.addAll(transactions);
     }
 
     public double getNetWorth() {

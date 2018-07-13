@@ -36,17 +36,27 @@ public class Scraper {
 
         for (Element row: rows) {
 
+            String classname = "debit";
             double amount = 0;
 
             String date = row.getElementsByClass("Date").text();
             String place = row.getElementsByClass("transactions").text();
 
-            if (!row.getElementsByClass("debit").text().toLowerCase().contains("e")) {
 
-                amount = stringToDouble(row.getElementsByClass("debit").text());
+            if (!row.getElementsByClass(classname).text().toLowerCase().contains("e")) {
 
+                amount = stringToDouble(row.getElementsByClass(classname).text());
+
+            } else {
+                classname = "credit";
+                if (!row.getElementsByClass(classname).text().toLowerCase().contains("e")) {
+
+                    amount = stringToDouble(row.getElementsByClass(classname).text());
+
+                }
             }
-            Transaction transaction = new Transaction(place, date, amount);
+
+            Transaction transaction = new Transaction(place, date, classname, amount);
             transactions.add(transaction);
         }
         return transactions;

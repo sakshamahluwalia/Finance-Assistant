@@ -1,6 +1,8 @@
 package Model;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
 
     private String place;
 
@@ -8,10 +10,26 @@ public class Transaction {
 
     private String date;
 
-    public Transaction(String place, String date, double amount) {
+    private String type;
+
+    private String category;
+
+    public Transaction(String place, String date, String type, double amount) {
         this.place = place;
         this.amount = amount;
         this.date = date;
+        this.type = type;
+        analysePlaceForCategory();
+    }
+
+    private void analysePlaceForCategory() {
+        if (place.toLowerCase().contains("withdrawal")) {
+            this.category = "fun";
+        } else if (place.toLowerCase().contains("presto") || place.toLowerCase().contains("ttc")) {
+            this.category = "travel";
+        } else {
+            this.category = "miscellaneous";
+        }
     }
 
     public String getPlace() {
@@ -26,6 +44,13 @@ public class Transaction {
         return date;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public String getCategory() {
+        return category;
+    }
 
     public void setPlace(String place) {
         this.place = place;

@@ -19,6 +19,7 @@ Transaction:
 amount
 place
 date
+category: String
 
 
 Goal:
@@ -35,6 +36,11 @@ afterFilter(ArrayList<Transaction>): ArrayList<Transaction>
 
 
 #ToDo
+use python to get all pages and save them for all transactions.
+get the total income working.
+start gui connection.
+
+
 bargraph will be used to see how the money that came in for the month has been divided.
 Logger class will log each months revenue and expenses before resetting.
 A filter class to have all the filters ready.

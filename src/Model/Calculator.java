@@ -8,6 +8,10 @@ public class Calculator {
         return credit - expense;
     }
 
+    /*
+    * This method will add the amount from all the transactions
+    *
+    */
     public double creditSpent(ArrayList<Transaction> transactions) {
 
         double creditSpent = 0;

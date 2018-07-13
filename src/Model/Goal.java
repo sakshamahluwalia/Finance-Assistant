@@ -1,6 +1,8 @@
 package Model;
 
-class Goal {
+import java.io.Serializable;
+
+class Goal implements Serializable {
 
     private String goal;
 
