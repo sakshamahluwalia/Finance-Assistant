@@ -1,7 +1,3 @@
-import Model.Calculator;
-import Model.Filters.CreditFilter;
-import Model.Filters.DebitFilter;
-import Model.Filters.MonthFilter;
 import Model.Scraper;
 import Model.User;
 import javafx.application.Application;
@@ -80,42 +76,33 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         User saksham;
-        saksham = new User();
+        saksham = new User("s", "s");
 
-        File file1 = new File("Deposit Account Details _ CIBC Online Banking.html");
-        File file2 = new File("My Accounts _ CIBC Online Banking.html");
+        File file1 = new File("2018.html");
+        File file2 = new File("2018p2.html");
+        File file3 = new File("My Accounts _ CIBC Online Banking.html");
         Scraper scraper = new Scraper();
-
-        MonthFilter monthFilter = new MonthFilter();
-        DebitFilter debitFilter = new DebitFilter();
-        CreditFilter creditFilter = new CreditFilter();
-        Calculator calculator = new Calculator();
 
 
         try {
 
             Document document1 = Jsoup.parse(file1, "UTF-8");
             Document document2 = Jsoup.parse(file2, "UTF-8");
+            Document document3 = Jsoup.parse(file3, "UTF-8");
 
-            saksham.setNetWorth(scraper.stringToDouble(scraper.getNetWorth(document2)));
-//            System.out.println(saksham.getNetWorth());
-            saksham.setTransactions(scraper.getTransactions(document1));
-//            System.out.println("I spent " + calculator.creditSpent
-//                    (debitFilter.afterFilter(saksham.getTransactions())));
-//
-//            System.out.println("I had " + calculator.creditSpent
-//                    (creditFilter.afterFilter(saksham.getTransactions())));
+            saksham.setNetWorth(scraper.stringToDouble(scraper.getNetWorth(document3)));
+            saksham.setTransactions(scraper.getTransactions(document1 ));
+            saksham.addTransactions(scraper.getTransactions(document2));
+            saksham.setMonthlyLimit(500);
+
+
+//            CsvFileWriter.writeCsvFile(saksham);
 
             Parent root = FXMLLoader.load(getClass().getResource("/View/LogIn.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("Finance Assistant");
-
-//        stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
-
-            monthFilter.setMonth("Jun");
-            System.out.println(calculator.creditSpent(monthFilter.afterFilter(saksham.getTransactions())));
 
         } catch (Exception e) {
             e.printStackTrace();

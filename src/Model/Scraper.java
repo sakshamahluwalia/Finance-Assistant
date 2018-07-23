@@ -28,9 +28,10 @@ public class Scraper {
 
     public ArrayList<Transaction> getTransactions(Document document) {
 
-        Element table = document.getElementById("ember2861");
+        Element table = document.getElementById("ember2728");
 
         org.jsoup.select.Elements rows = table.select("tr");
+        rows.remove(0);
 
         ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -39,7 +40,8 @@ public class Scraper {
             String classname = "debit";
             double amount = 0;
 
-            String date = row.getElementsByClass("Date").text();
+            String date = row.getElementsByClass("Date").text().substring(0, 6).replace(",", "");
+            String month = date.substring(0, 3);
             String place = row.getElementsByClass("transactions").text();
 
 
@@ -56,7 +58,7 @@ public class Scraper {
                 }
             }
 
-            Transaction transaction = new Transaction(place, date, classname, amount);
+            Transaction transaction = new Transaction(place, month, date, classname, amount);
             transactions.add(transaction);
         }
         return transactions;

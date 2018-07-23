@@ -8,14 +8,17 @@ public class Transaction implements Serializable {
 
     private double amount;
 
+    private String month;
+
     private String date;
 
     private String type;
 
     private String category;
 
-    public Transaction(String place, String date, String type, double amount) {
+    public Transaction(String place, String month, String date, String type, double amount) {
         this.place = place;
+        this.month = month;
         this.amount = amount;
         this.date = date;
         this.type = type;
@@ -40,6 +43,14 @@ public class Transaction implements Serializable {
         return amount;
     }
 
+    public String getAmountString() {
+        return Double.toString(amount);
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
     public String getDate() {
         return date;
     }
@@ -62,5 +73,11 @@ public class Transaction implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Transaction && ((Transaction) obj).getPlace().equalsIgnoreCase(this.place)
+            && ((Transaction) obj).getAmount() == this.amount;
     }
 }

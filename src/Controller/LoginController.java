@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.UserManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +28,7 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Home.fxml"));
             Parent root = fxmlLoader.load();
             HomepageController homepageController = fxmlLoader.getController();
-            homepageController.setUp();
+            homepageController.setUp(UserManager.findUser(username.getText()));
             loginGrid.getChildren().setAll(root);
         } else {
             System.out.println("error");
