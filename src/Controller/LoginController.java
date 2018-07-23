@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.UserManager;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +12,8 @@ import java.io.IOException;
 
 public class LoginController {
 
+    private User user;
+
 
     @FXML
     private AnchorPane loginGrid;
@@ -22,13 +24,17 @@ public class LoginController {
     @FXML
     private PasswordField password;
 
+    public void setup(User user) {
+        this.user = user;
+    }
+
     public void verify() throws IOException {
-        if (username.getText().trim().equalsIgnoreCase("s") &&
-                password.getText().trim().equalsIgnoreCase("s")) {
+        if (username.getText().trim().equalsIgnoreCase("saksham") &&
+                password.getText().trim().equalsIgnoreCase("ahlus")) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/Home.fxml"));
             Parent root = fxmlLoader.load();
             HomepageController homepageController = fxmlLoader.getController();
-            homepageController.setUp(UserManager.findUser(username.getText()));
+            homepageController.setUp(user);
             loginGrid.getChildren().setAll(root);
         } else {
             System.out.println("error");

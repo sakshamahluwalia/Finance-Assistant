@@ -21,9 +21,5 @@ public class Calculator {
         return creditSpent;
     }
 
-    int numberOfTransactions(ArrayList<Transaction> transactions) {
-        return transactions.size();
-    }
-
 
 }

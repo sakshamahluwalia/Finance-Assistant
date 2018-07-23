@@ -9,6 +9,7 @@ import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -24,6 +27,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -187,5 +191,26 @@ public class HomepageController {
             }
         }
 
+    }
+
+    /**
+     * This method is responsible for creating a window to create a new Transaction.
+     */
+    @FXML
+    public void addTransaction() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/GainInfo.fxml"));
+            Parent root = fxmlLoader.load();
+            addTransactionController addTransactionController = fxmlLoader.getController();
+            addTransactionController.setup(user);
+            Stage stage = new Stage();
+            stage.setTitle("Add Table");
+            stage.setScene(new Scene(root, 300, 200));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setOnCloseRequest(e -> loadInfo());
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
