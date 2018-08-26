@@ -1,9 +1,10 @@
 package Model;
+
 import java.io.FileWriter;
 import java.io.IOException;
+
 /**
  * @author ashraf
- *
  */
 public class CsvFileWriter {
 
@@ -45,7 +46,6 @@ public class CsvFileWriter {
                 fileWriter.append(transaction.getCategory());
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
-
 
 
             System.out.println("CSV file was created successfully !!!");

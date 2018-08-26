@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Calculator;
 import Model.Filters.DebitFilter;
-import Model.Filters.Filter;
 import Model.Scraper;
 import Model.Transaction;
 import Model.User;
@@ -10,13 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,13 +24,10 @@ import org.jsoup.nodes.Document;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class HomepageController {
 
@@ -108,12 +104,12 @@ public class HomepageController {
     public void loadChart() {
         int debit = 0;
         int credit = 0;
-        for (Transaction transaction: user.getTransactions()) {
+        for (Transaction transaction : user.getTransactions()) {
             if (transaction.getType().equalsIgnoreCase("debit")) {
                 debit++;
             }
         }
-        for (Transaction transaction: user.getTransactions()) {
+        for (Transaction transaction : user.getTransactions()) {
             if (transaction.getType().equalsIgnoreCase("credit")) {
                 credit++;
             }
@@ -170,6 +166,7 @@ public class HomepageController {
     /**
      * Show an open dialog with a file chooser set up according to the
      * parameters of this builder.
+     *
      * @return A file if the user clicks the accept button and a file or
      * folder was selected at the time the user clicked cancel.
      */

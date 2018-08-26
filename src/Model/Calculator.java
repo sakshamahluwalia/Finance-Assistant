@@ -15,7 +15,7 @@ public class Calculator {
     public double creditSpent(ArrayList<Transaction> transactions) {
 
         double creditSpent = 0;
-        for (Transaction transaction: transactions) {
+        for (Transaction transaction : transactions) {
             creditSpent += transaction.getAmount();
         }
         return creditSpent;

@@ -1,8 +1,9 @@
 package Model;
 
-import java.util.ArrayList;
-import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import java.util.ArrayList;
 
 
 public class Scraper {
@@ -12,8 +13,7 @@ public class Scraper {
         try {
 
             // this query gets user's net worth
-            Element netWorth = document.getElementById("ember1806").getElementsByClass
-                    ("category-balance").first();
+            Element netWorth = document.getElementsByClass("category-balance").first();
 
             return netWorth.text();
 
@@ -28,14 +28,14 @@ public class Scraper {
 
     public ArrayList<Transaction> getTransactions(Document document) {
 
-        Element table = document.getElementById("ember2728");
+        org.jsoup.select.Elements table = document.getElementsByTag("tbody");
 
         org.jsoup.select.Elements rows = table.select("tr");
         rows.remove(0);
 
         ArrayList<Transaction> transactions = new ArrayList<>();
 
-        for (Element row: rows) {
+        for (Element row : rows) {
 
             String classname = "debit";
             double amount = 0;

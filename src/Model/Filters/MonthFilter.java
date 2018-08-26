@@ -1,6 +1,7 @@
 package Model.Filters;
 
 import Model.Transaction;
+
 import java.util.ArrayList;
 
 public class MonthFilter extends Filter {

@@ -1,9 +1,10 @@
 package Model.Filters;
 
 import Model.Transaction;
+
 import java.util.ArrayList;
 
-public class DebitFilter extends Filter{
+public class DebitFilter extends Filter {
 
     @Override
     public ArrayList<Transaction> afterFilter(ArrayList<Transaction> transactions) {

@@ -1,4 +1,5 @@
 import Controller.LoginController;
+import Model.CsvFileWriter;
 import Model.Scraper;
 import Model.User;
 import javafx.application.Application;
@@ -9,6 +10,8 @@ import javafx.stage.Stage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.IOException;
 
@@ -28,22 +31,17 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         User saksham = new User();
-
-        File file1 = new File("2018.html");
-        File file2 = new File("2018p2.html");
-        File file3 = new File("My Accounts _ CIBC Online Banking.html");
         Scraper scraper = new Scraper();
 
+        //first doc is for networth
+        Document document1 = Jsoup.parse(selectFile(), "UTF-8");
+        //second doc is for transactions
+        Document document2 = Jsoup.parse(selectFile(), "UTF-8");
 
         try {
-
-            Document document1 = Jsoup.parse(file1, "UTF-8");
-            Document document2 = Jsoup.parse(file2, "UTF-8");
-            Document document3 = Jsoup.parse(file3, "UTF-8");
-
-            saksham.setNetWorth(scraper.stringToDouble(scraper.getNetWorth(document3)));
-            saksham.setTransactions(scraper.getTransactions(document1 ));
-            saksham.addTransactions(scraper.getTransactions(document2));
+//
+            saksham.setNetWorth(scraper.stringToDouble(scraper.getNetWorth(document1)));
+            saksham.setTransactions(scraper.getTransactions(document2));
             saksham.setMonthlyLimit(500);
 
 
@@ -81,6 +79,17 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch();
+    }
+
+    private File selectFile() {
+
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int returnValue = jfc.showOpenDialog(null);
+        // int returnValue = jfc.showSaveDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            return jfc.getSelectedFile();
+        }
+        return null;
     }
 
 }

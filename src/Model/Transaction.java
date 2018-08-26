@@ -78,6 +78,6 @@ public class Transaction implements Serializable {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Transaction && ((Transaction) obj).getPlace().equalsIgnoreCase(this.place)
-            && ((Transaction) obj).getAmount() == this.amount;
+                && ((Transaction) obj).getAmount() == this.amount;
     }
 }
