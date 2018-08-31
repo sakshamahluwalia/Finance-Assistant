@@ -40,12 +40,13 @@ public class Main extends Application {
 
         try {
 //
-            saksham.setNetWorth(scraper.stringToDouble(scraper.getNetWorth(document1)));
-            saksham.setTransactions(scraper.getTransactions(document2));
+//            saksham.setNetWorth(scraper.stringToDouble(scraper.getNetWorth(document1)));
+            saksham.setTransactions(scraper.getTransactions(document1));
+            saksham.addTransactions(scraper.getTransactions(document2));
             saksham.setMonthlyLimit(500);
 
 
-//            CsvFileWriter.writeCsvFile(saksham);
+            CsvFileWriter.writeCsvFile(saksham);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/LogIn.fxml"));
             Parent root = fxmlLoader.load();
