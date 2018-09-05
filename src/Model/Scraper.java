@@ -39,7 +39,6 @@ public class Scraper {
 
             String classname = "debit";
             double amount = 0;
-
             String date = row.getElementsByClass("Date").text().substring(0, 6).replace(",", "");
             String month = date.substring(0, 3);
             String place = row.getElementsByClass("transactions").text();

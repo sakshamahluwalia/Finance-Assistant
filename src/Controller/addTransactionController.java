@@ -5,6 +5,7 @@ import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+// find a way to close the popup when ok is pressed.
 public class addTransactionController {
 
     private User user;
@@ -28,7 +29,7 @@ public class addTransactionController {
     public void finish() {
         Transaction transaction = new Transaction(place.getText().trim(),
                 date.getText().substring(0, 2).trim(), date.getText().trim(), type.getText().trim(), new Double(amount.getText().trim()));
-        user.getTransactions().add(transaction);
+        user.addTransaction(transaction);
     }
 
 }

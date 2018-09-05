@@ -11,7 +11,7 @@ public class User implements Serializable {
 
     private int percentageToSave;
 
-    private ArrayList<Transaction> transactions;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
@@ -19,6 +19,10 @@ public class User implements Serializable {
 
     public void setTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
     }
 
     public void addTransactions(ArrayList<Transaction> transactions) {

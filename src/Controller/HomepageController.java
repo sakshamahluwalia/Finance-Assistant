@@ -1,10 +1,7 @@
 package Controller;
 
-import Model.Calculator;
+import Model.*;
 import Model.Filters.DebitFilter;
-import Model.Scraper;
-import Model.Transaction;
-import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -135,8 +132,8 @@ public class HomepageController {
         updateInventoryTable();
         setNetWorthLabel(new Double(user.getNetWorth()).toString());
         setTransactionNumber(new Double(user.getTransactions().size()).toString());
-        setCreditLeftLabel();
         setCreditSpentLabel();
+        setCreditLeftLabel();
     }
 
     private void setNetWorthLabel(String text) {
@@ -182,6 +179,7 @@ public class HomepageController {
             try {
                 Document document3 = Jsoup.parse(selectedFile, "UTF-8");
                 user.addTransactions(scraper.getTransactions(document3));
+                CsvFileWriter.writeCsvFile(user);
                 loadInfo();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -202,7 +200,7 @@ public class HomepageController {
             addTransactionController.setup(user);
             Stage stage = new Stage();
             stage.setTitle("Add Table");
-            stage.setScene(new Scene(root, 300, 200));
+            stage.setScene(new Scene(root, 300, 250));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setOnCloseRequest(e -> loadInfo());
             stage.show();

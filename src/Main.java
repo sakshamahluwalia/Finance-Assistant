@@ -1,18 +1,10 @@
 import Controller.LoginController;
-import Model.CsvFileWriter;
-import Model.Scraper;
 import Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -31,22 +23,9 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         User saksham = new User();
-        Scraper scraper = new Scraper();
-
-        //first doc is for networth
-        Document document1 = Jsoup.parse(selectFile(), "UTF-8");
-        //second doc is for transactions
-        Document document2 = Jsoup.parse(selectFile(), "UTF-8");
 
         try {
-//
-//            saksham.setNetWorth(scraper.stringToDouble(scraper.getNetWorth(document1)));
-            saksham.setTransactions(scraper.getTransactions(document1));
-            saksham.addTransactions(scraper.getTransactions(document2));
             saksham.setMonthlyLimit(500);
-
-
-            CsvFileWriter.writeCsvFile(saksham);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/LogIn.fxml"));
             Parent root = fxmlLoader.load();
@@ -60,7 +39,6 @@ public class Main extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 
@@ -80,17 +58,6 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch();
-    }
-
-    private File selectFile() {
-
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int returnValue = jfc.showOpenDialog(null);
-        // int returnValue = jfc.showSaveDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            return jfc.getSelectedFile();
-        }
-        return null;
     }
 
 }
